@@ -7,11 +7,13 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Set port and verify_token
+// Set port
 const port = process.env.PORT || 3000;
-const verifyToken = process.env.VERIFY_TOKEN;
 
-// Route for GET requests
+// Hardcode the verify token instead of using env variable
+const verifyToken = '1234'; // <-- Directly using 1234
+
+// Route for GET requests (Webhook verification)
 app.get('/', (req, res) => {
   const { 'hub.mode': mode, 'hub.challenge': challenge, 'hub.verify_token': token } = req.query;
 
